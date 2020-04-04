@@ -11,13 +11,29 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventViewHolder> {
 
+    ArrayList<Task> tasks;
     private String [] courses_names;
     private Context context;
 
     public TaskTileAdapter(Context ct, String courses_names[]) {
         context = ct;
+        tasks = new ArrayList<>();
+        for (String c : courses_names) {
+            Calendar dueDate = Calendar.getInstance();
+            dueDate.set(Calendar.DAY_OF_MONTH, (int) (Math.random()*29) + 1);
+            dueDate.set(Calendar.MONTH, (int) (Math.random()*3) + 3);
+
+            Task task = new Task(0, "Textbuch lesen", String.format(Locale.GERMAN,
+                    "Lies die Seiten 33-35 im Textbuch %s und löse die Übungen",
+                    c), null, null, dueDate, Math.random() < 0.5);
+            tasks.add(task);
+        }
         this.courses_names = courses_names;
     }
 
@@ -31,7 +47,11 @@ public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventV
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, final int position) {
-        holder.titleText.setText(courses_names[position]);
+
+        holder.titleText.setText(tasks.get(position).getTitle());
+        holder.detailsText.setText(tasks.get(position).getDescription());
+        holder.typeText.setText(courses_names[position].substring(0,2));
+        holder.deadlineText.setText(tasks.get(position).formattedDueDate());
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
