@@ -1,6 +1,8 @@
 package com.example.openeducationapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +58,9 @@ public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventV
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, TaskDetailActivity.class);
+                intent.putExtra("task_id",tasks.get(position).getTaskID());
+                context.startActivity(intent);
             }
         });
     }

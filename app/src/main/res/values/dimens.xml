@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="text_size_task">18sp</string>
+    <dimen name="task_text_size">18sp</dimen>
+    <dimen name="task_desc_size">22sp</dimen>
+    <dimen name="task_title_size">28sp</dimen>
 </resources>

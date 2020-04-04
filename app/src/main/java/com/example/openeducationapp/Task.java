@@ -1,16 +1,27 @@
 package com.example.openeducationapp;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Task {
+public class Task implements Serializable {
 
-    long taskID;
+    private long taskID;
 
-    String title, description;
-    Course course;
-    Calendar dateCreated, dueDate;
-    boolean isDone;
+    private String title, description;
+    private Course course;
+    private Calendar dateCreated, dueDate;
+    private boolean isDone;
+
+    public Task(){
+        this.taskID = 0;
+        this.title = "title";
+        this.description = "description";
+        this.course = null;
+        this.dateCreated = Calendar.getInstance();
+        this.dueDate = Calendar.getInstance();
+        this.isDone = false;
+    }
 
     public Task(long id, String title, String description, Course course, Calendar dateCreated, Calendar dueDate, boolean isDone) {
         this.taskID = id;
@@ -50,6 +61,9 @@ public class Task {
         return isDone;
     }
 
+    public void setDone(boolean done) {
+        isDone = done;
+    }
 
     public String formattedDueDate() {
         return String.format(Locale.GERMAN, "%s %02d.%02d.%02d",

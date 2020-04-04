@@ -1,6 +1,8 @@
 package com.example.openeducationapp;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
     long courseID;
     String name;
     String abbreviation;

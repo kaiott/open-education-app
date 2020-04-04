@@ -3,4 +3,11 @@
 
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <string name="txt_task_description">Beschreibung:</string>
+    <string name="txt_todo">zu erledigen bis:</string>
+    <string name="btn_download_docs">Dokumente</string>
+    <string name="btn_chatgroup">Chatgruppe</string>
+    <string name="btn_done">erledigt!</string>
+
 </resources>
