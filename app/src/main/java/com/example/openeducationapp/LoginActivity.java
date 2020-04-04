@@ -39,12 +39,21 @@ public class LoginActivity extends AppCompatActivity {
             Task task = new Task(i,
                     taskTitles[(int) (Math.random()*taskTitles.length)],
                     taskDetails[(int) (Math.random()*taskDetails.length)],
-                    Course.courses.get((long) (Math.random()*Course.courses.size())),
+                    Course.courses.get((int) (Math.random()*Course.courses.size())),
                     null,
                     dueDate,
                     Math.random() < 0.67);
             Task.addTask(task);
         }
+
+        String [] firstNames = {"Lara", "Lukas", "Maya", "Maurus", "Nicole", "Nils"};
+        String [] lastNames = {"Müller", "Meier", "von Grünigen", "Berger", "Steiner"};
+        String [] classNames = {"1a", "1b", "2a", "2b", "3a", "3b","4a", "4b", "5a", "5b", "6a", "6b"};
+
+        Student.setStudent(new Student(0,
+                firstNames[(int) (Math.random()*firstNames.length)],
+                lastNames[(int) (Math.random()*lastNames.length)],
+                classNames[(int) (Math.random()*classNames.length)]));
 
 
         String username = getSharedPreferences("user", MODE_PRIVATE).getString("username", "");

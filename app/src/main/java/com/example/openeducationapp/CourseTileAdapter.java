@@ -35,8 +35,8 @@ public class CourseTileAdapter extends RecyclerView.Adapter<CourseTileAdapter.Ev
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, final int position) {
-        holder.titleText.setText(Course.courses.get((long) position).getName());
-        Course.Ratio ratioTasksDone = Course.courses.get((long) position).numberOfTasks();
+        holder.titleText.setText(Course.courses.get(position).getName());
+        Course.Ratio ratioTasksDone = Course.courses.get(position).numberOfTasks();
         holder.progressBar.setMax(ratioTasksDone.getTotal());
         holder.progressBar.setProgress(ratioTasksDone.getDone());
         holder.progressText.setText(ratioTasksDone.toString());

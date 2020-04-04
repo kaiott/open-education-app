@@ -13,9 +13,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -43,6 +46,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View nav_header = LayoutInflater.from(this).inflate(R.layout.nav_header, null);
+        ((TextView) nav_header.findViewById(R.id.student_name)).setText(Student.getStudent().getFullName());
+        ((TextView) nav_header.findViewById(R.id.class_name)).setText(Student.getStudent().getClassName());
+        navigationView.removeHeaderView(navigationView.getHeaderView(0));
+        navigationView.addHeaderView(nav_header);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);

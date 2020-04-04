@@ -10,13 +10,13 @@ import java.util.Locale;
 public class Course implements Serializable {
 
     // Hashmap with all courses
-    public static HashMap<Long, Course> courses;
+    public static HashMap<Integer, Course> courses;
 
-    private long courseID;
+    private int courseID;
     private String name;
     private String abbreviation;
 
-    public long getCourseID() {
+    public int getCourseID() {
         return courseID;
     }
 
@@ -28,7 +28,7 @@ public class Course implements Serializable {
         return abbreviation;
     }
 
-    public Course(long id, String name, String abbreviation) {
+    public Course(int id, String name, String abbreviation) {
         this.courseID = id;
         this.name = name;
         this.abbreviation = abbreviation;

@@ -25,7 +25,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     Button btn_done, btn_documents, btn_chatgroup;
 
     Task task;
-    long task_id;
+    int task_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     private void getData() {
         task = new Task();
         if (getIntent().hasExtra("task_id")) {
-            task_id = getIntent().getLongExtra("task_id", -1);
+            task_id = getIntent().getIntExtra("task_id", -1);
             if (task_id != -1) {
                 task = Task.tasks.get(task_id);
             }

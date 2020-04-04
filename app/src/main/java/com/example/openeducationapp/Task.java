@@ -7,9 +7,9 @@ import java.util.Locale;
 
 public class Task implements Serializable, Comparable<Task> {
 
-    public static HashMap<Long, Task> tasks;
+    public static HashMap<Integer, Task> tasks;
 
-    private long taskID;
+    private int taskID;
     private String title, description;
     private Course course;
     private Calendar dateCreated, dueDate;
@@ -25,7 +25,7 @@ public class Task implements Serializable, Comparable<Task> {
         this.isDone = false;
     }
 
-    public Task(long id, String title, String description, Course course, Calendar dateCreated, Calendar dueDate, boolean isDone) {
+    public Task(int id, String title, String description, Course course, Calendar dateCreated, Calendar dueDate, boolean isDone) {
         this.taskID = id;
         this.title = title;
         this.description = description;
@@ -35,7 +35,7 @@ public class Task implements Serializable, Comparable<Task> {
         this.isDone = isDone;
     }
 
-    public long getTaskID() {
+    public int getTaskID() {
         return taskID;
     }
 
