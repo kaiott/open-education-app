@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new MainFragment(item.getItemId())).commit();
                 break;
             case R.id.nav_settings:
-                Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
                 Intent intent1 = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent1);
                 break;
