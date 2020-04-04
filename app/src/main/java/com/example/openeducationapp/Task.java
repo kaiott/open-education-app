@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class Task implements Serializable {
+public class Task implements Serializable, Comparable<Task> {
 
     public static HashMap<Long, Task> tasks;
 
@@ -99,5 +99,10 @@ public class Task implements Serializable {
             tasks = new HashMap<>();
         }
         tasks.put(task.taskID, task);
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        return this.getDueDate().compareTo(task.dueDate);
     }
 }

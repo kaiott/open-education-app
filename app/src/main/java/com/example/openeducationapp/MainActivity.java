@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -134,8 +136,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //updateEvents();
-                        //updateUI();
+                        updateUI();
                     }
                 });
         return mBuilder.create();
