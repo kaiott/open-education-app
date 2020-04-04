@@ -1,4 +1,3 @@
-var ce= require("../name.js")
 var ioClient = require('socket.io-client')
 var socket = ioClient('http://localhost:8000');
 
@@ -36,9 +35,8 @@ function newTeacher(prename, surname){
 
 socket.on('connect', ()=>{
     for(let i = 1; i <2; i++){
-        let creds = ce.CE()
-        let surn = creds.surname
-        let pname = creds.prename
+        let surn = "Horvath"
+        let pname = "Lars"
         //newStudent(pname, surn)
         //newTask("test"+i, text, 1586034809+i*600)
         newTeacher(pname, surn)
