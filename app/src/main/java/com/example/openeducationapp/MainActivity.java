@@ -97,7 +97,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_tasks:
             case R.id.nav_classroom:
             case R.id.nav_chat:
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new MainFragment(item.getItemId())).commit();
                 break;
             case R.id.nav_settings:
                 Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
