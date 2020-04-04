@@ -26,7 +26,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     Task task;
 
-    long task_id;
+    int task_id;
     int text_size;
 
 
