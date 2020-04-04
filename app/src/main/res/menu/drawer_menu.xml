@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_event_black_24dp"
+            android:title="Benachrichtigungen" />
+        <item
+            android:id="@+id/nav_classroom"
+            android:icon="@drawable/ic_featured_play_list_black_24dp"
+            android:title="Klassenzimmer" />
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Chat" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_hot_tub_black_24dp"
+                android:title="Einstellungen" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_message"
+                android:title="Abmelden" />
+        </menu>
+    </item>
+</menu>
