@@ -2,11 +2,16 @@ package com.example.openeducationapp;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class Task implements Serializable {
 
+
     private long taskID;
+
+    public static HashMap<Long, Task> tasks;
+
 
     private String title, description;
     private Course course;
@@ -90,5 +95,12 @@ public class Task implements Serializable {
                 return "Sa";
         }
         return "dfasdfjoasfdj";
+    }
+
+    public static void addTask(Task task) {
+        if (tasks == null) {
+            tasks = new HashMap<>();
+        }
+        tasks.put(task.taskID, task);
     }
 }

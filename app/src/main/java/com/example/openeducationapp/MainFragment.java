@@ -43,7 +43,7 @@ public class MainFragment extends Fragment {
         RecyclerView.Adapter myAdapter;
         switch (nav_item) {
             case R.id.nav_tasks:
-                myAdapter = new TaskTileAdapter(getActivity(), course_names);
+                myAdapter = new TaskTileAdapter(getActivity(), 15);
                 break;
             case R.id.nav_classroom:
                 myAdapter = new CourseTileAdapter(getActivity(), course_names);

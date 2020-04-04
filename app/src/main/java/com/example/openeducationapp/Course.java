@@ -1,8 +1,14 @@
 package com.example.openeducationapp;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Course implements Serializable {
+
+    // Hashmap with all courses
+    public static HashMap<Long, Course> courses;
+
+
     long courseID;
     String name;
     String abbreviation;
@@ -27,5 +33,12 @@ public class Course implements Serializable {
 
     public Course() {
 
+    }
+
+    public static void addCourse(Course course) {
+        if (courses == null) {
+            courses = new HashMap<>();
+        }
+        courses.put(course.courseID, course);
     }
 }

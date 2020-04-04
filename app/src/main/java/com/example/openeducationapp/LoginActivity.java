@@ -3,21 +3,50 @@ package com.example.openeducationapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText editEmail, editPassword;
+
+    String [] taskTitles = {"Textbuch lesen",
+                            "Übungsheft",};
+    String [] taskDetails = {"Seiten 33-35",
+                            "Kapitel 2",
+                            "Rest von Kapitel 4"};
+    String [] courseNames = {"Mathematik", "Deutsch", "Französisch", "Geschichte", "English", "Natur Mensch Mitwelt"};
+    String [] courseAbbs = {"Math", "DE", "Franz", "GE", "Eng", "NNM"};
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        for (int i = 0; i < courseNames.length; i++) {
+            Course.addCourse(new Course(i, courseNames[i], courseAbbs[i]));
+        }
+        for (int i = 0; i < 15; i++) {
+            Calendar dueDate = Calendar.getInstance();
+            dueDate.set(Calendar.DAY_OF_MONTH, (int) (Math.random()*29) + 1);
+            dueDate.set(Calendar.MONTH, (int) (Math.random()*3) + 3);
+
+            Task task = new Task(i,
+                    taskTitles[(int) (Math.random()*taskTitles.length)],
+                    taskDetails[(int) (Math.random()*taskDetails.length)],
+                    Course.courses.get((long) (Math.random()*Course.courses.size())),
+                    null,
+                    dueDate,
+                    Math.random() < 0.5);
+            Task.addTask(task);
+        }
+
 
         String username = getSharedPreferences("user", MODE_PRIVATE).getString("username", "");
         if (!username.equals("")) {

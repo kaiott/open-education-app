@@ -2,7 +2,6 @@ package com.example.openeducationapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,23 +19,12 @@ import java.util.Locale;
 public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventViewHolder> {
 
     ArrayList<Task> tasks;
-    private String [] courses_names;
     private Context context;
 
-    public TaskTileAdapter(Context ct, String courses_names[]) {
+    public TaskTileAdapter(Context ct, int maxtasks) {
         context = ct;
         tasks = new ArrayList<>();
-        for (String c : courses_names) {
-            Calendar dueDate = Calendar.getInstance();
-            dueDate.set(Calendar.DAY_OF_MONTH, (int) (Math.random()*29) + 1);
-            dueDate.set(Calendar.MONTH, (int) (Math.random()*3) + 3);
-
-            Task task = new Task(0, "Textbuch lesen", String.format(Locale.GERMAN,
-                    "Lies die Seiten 33-35 im Textbuch %s und löse die Übungen",
-                    c), null, null, dueDate, Math.random() < 0.5);
-            tasks.add(task);
-        }
-        this.courses_names = courses_names;
+        tasks.addAll(Task.tasks.values());
     }
 
     @NonNull
@@ -52,22 +40,24 @@ public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventV
 
         holder.titleText.setText(tasks.get(position).getTitle());
         holder.detailsText.setText(tasks.get(position).getDescription());
-        holder.typeText.setText(courses_names[position].substring(0,2));
+        holder.typeText.setText(tasks.get(position).getCourse().getAbbreviation());
         holder.deadlineText.setText(tasks.get(position).formattedDueDate());
         holder.statusImage.setVisibility(tasks.get(position).isDone() ? View.VISIBLE: View.INVISIBLE);
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(context, TaskDetailActivity.class);
                 intent.putExtra("task_id",tasks.get(position).getTaskID());
                 context.startActivity(intent);
+
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return courses_names.length;
+        return tasks.size();
     }
 
     public class EventViewHolder extends RecyclerView.ViewHolder{
