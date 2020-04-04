@@ -21,10 +21,9 @@ public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventV
     ArrayList<Task> tasks;
     private Context context;
 
-    public TaskTileAdapter(Context ct, int maxtasks) {
+    public TaskTileAdapter(Context ct, ArrayList<Task> tasks) {
         context = ct;
-        tasks = new ArrayList<>();
-        tasks.addAll(Task.tasks.values());
+        this.tasks = tasks;
     }
 
     @NonNull

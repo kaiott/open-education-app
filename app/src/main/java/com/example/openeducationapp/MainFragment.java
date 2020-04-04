@@ -1,6 +1,8 @@
 package com.example.openeducationapp;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 
 public class MainFragment extends Fragment {
 
@@ -43,7 +50,18 @@ public class MainFragment extends Fragment {
         RecyclerView.Adapter myAdapter;
         switch (nav_item) {
             case R.id.nav_tasks:
-                myAdapter = new TaskTileAdapter(getActivity(), 15);
+                ArrayList<Task> tasks= new ArrayList<>();
+                boolean showPast = getActivity().getSharedPreferences("init", Context.MODE_PRIVATE).getBoolean("filterSelection0", true);
+                boolean showDone = getActivity().getSharedPreferences("init", Context.MODE_PRIVATE).getBoolean("filterSelection1", true);
+                Calendar yesterday = Calendar.getInstance();
+                yesterday.add(Calendar.DAY_OF_MONTH, -1);
+                for (Task task : Task.tasks.values()) {
+                    if ((showPast || task.getDueDate().compareTo(yesterday) > 0) && (showDone || !task.isDone())) {
+                        tasks.add(task);
+                    }
+                }
+                Collections.sort(tasks);
+                myAdapter = new TaskTileAdapter(getActivity(), tasks);
                 break;
             case R.id.nav_classroom:
                 myAdapter = new CourseTileAdapter(getActivity(), 15);

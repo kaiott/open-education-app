@@ -24,11 +24,11 @@ public class TaskDetailActivity extends AppCompatActivity {
     TextView txt_task_title, txt_task_description, txt_todo;
     Button btn_done, btn_documents, btn_chatgroup;
 
-    ArrayList<Task> tasks;
     Task task;
+
     long task_id;
-    boolean is_done;
     int text_size;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +51,8 @@ public class TaskDetailActivity extends AppCompatActivity {
         btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (is_done) {
-                    task.setDone(false);
-                    is_done = false;
-                } else {
-                    task.setDone(true);
-                    is_done = true;
-                }
-                btn_done.setSelected(is_done);
+                task.setDone(!task.isDone());
+                btn_done.setSelected(task.isDone());
             }
         });
 
@@ -68,7 +62,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     private void getData() {
         task = new Task();
         if (getIntent().hasExtra("task_id")) {
-            task_id = getIntent().getLongExtra("task_id", -1);
+            task_id = getIntent().getIntExtra("task_id", -1);
             if (task_id != -1) {
                 task = Task.tasks.get(task_id);
             }
