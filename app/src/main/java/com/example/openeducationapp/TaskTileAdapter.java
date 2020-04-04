@@ -37,11 +37,36 @@ public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventV
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, final int position) {
 
+        int flag_id;
+        switch (tasks.get(position).getCourse().getAbbreviation()){
+            case "Math":
+                flag_id = R.drawable.task_flag_math;
+                break;
+            case "DE":
+                flag_id = R.drawable.task_flag_de;
+                break;
+            case "Franz":
+                flag_id = R.drawable.task_flag_fr;
+                break;
+            case "GE":
+                flag_id = R.drawable.task_flag_ge;
+                break;
+            case "Eng":
+                flag_id=R.drawable.task_flag_en;
+                break;
+            case "NNM":
+                flag_id = R.drawable.task_flag_nmm;
+                break;
+            default:
+                flag_id = R.drawable.task_flag_de;
+        }
+
         holder.titleText.setText(tasks.get(position).getTitle());
         holder.detailsText.setText(tasks.get(position).getDescription());
         holder.typeText.setText(tasks.get(position).getCourse().getAbbreviation());
         holder.deadlineText.setText(tasks.get(position).formattedDueDate());
         holder.statusImage.setVisibility(tasks.get(position).isDone() ? View.VISIBLE: View.INVISIBLE);
+        holder.task_flag.setImageResource(flag_id);
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +87,7 @@ public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventV
     public class EventViewHolder extends RecyclerView.ViewHolder{
 
         TextView titleText, detailsText, deadlineText, typeText;
-        ImageView statusImage;
+        ImageView statusImage, task_flag;
         ConstraintLayout constraintLayout;
 
         public EventViewHolder(@NonNull View itemView) {
@@ -73,6 +98,7 @@ public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventV
             typeText = itemView.findViewById(R.id.task_type);
             statusImage = itemView.findViewById(R.id.task_status);
             constraintLayout = itemView.findViewById(R.id.mainLayout);
+            task_flag = itemView.findViewById(R.id.task_flag);
         }
     }
 }
