@@ -46,9 +46,11 @@ public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventV
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(context, TaskDetailsActivity.class);
-                intent.putExtra("taskID", tasks.get(position).getTaskID());
-                context.startActivity(intent);*/
+
+                Intent intent = new Intent(context, TaskDetailActivity.class);
+                intent.putExtra("task_id",tasks.get(position).getTaskID());
+                context.startActivity(intent);
+
             }
         });
     }

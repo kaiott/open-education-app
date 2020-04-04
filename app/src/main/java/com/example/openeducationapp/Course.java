@@ -1,8 +1,9 @@
 package com.example.openeducationapp;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Course {
+public class Course implements Serializable {
 
     // Hashmap with all courses
     public static HashMap<Long, Course> courses;
