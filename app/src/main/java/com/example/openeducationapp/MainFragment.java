@@ -26,7 +26,7 @@ public class MainFragment extends Fragment {
         int fragment;
 
         switch (nav_item) {
-            case R.id.nav_news:
+            case R.id.nav_tasks:
                 fragment = R.layout.fragment_recycler;
                 break;
             case R.id.nav_classroom:
@@ -42,7 +42,7 @@ public class MainFragment extends Fragment {
         String [] course_names ={"Mathematik", "Deutsch", "Französisch", "Geschichte", "English", "Natur Mensch Mitwelt"};
         RecyclerView.Adapter myAdapter;
         switch (nav_item) {
-            case R.id.nav_news:
+            case R.id.nav_tasks:
                 myAdapter = new TaskTileAdapter(getActivity(), course_names);
                 break;
             case R.id.nav_classroom:

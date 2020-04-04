@@ -5,9 +5,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_news"
+            android:id="@+id/nav_tasks"
             android:icon="@drawable/ic_event_black_24dp"
-            android:title="Benachrichtigungen" />
+            android:title="Aufgaben" />
         <item
             android:id="@+id/nav_classroom"
             android:icon="@drawable/ic_featured_play_list_black_24dp"

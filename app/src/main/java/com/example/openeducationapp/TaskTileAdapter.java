@@ -52,6 +52,7 @@ public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventV
         holder.detailsText.setText(tasks.get(position).getDescription());
         holder.typeText.setText(courses_names[position].substring(0,2));
         holder.deadlineText.setText(tasks.get(position).formattedDueDate());
+        holder.statusImage.setVisibility(tasks.get(position).isDone() ? View.VISIBLE: View.INVISIBLE);
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
