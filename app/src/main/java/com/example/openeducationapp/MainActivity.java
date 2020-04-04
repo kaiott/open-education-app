@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new MainFragment(R.id.nav_news)).commit();
             navigationView.setCheckedItem(R.id.nav_news);
         }
-
     }
 
     @Override
