@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText editEmail, editPassword;
@@ -32,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         for (int i = 0; i < courseNames.length; i++) {
             Course.addCourse(new Course(i, courseNames[i], courseAbbs[i]));
         }
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 60; i++) {
             Calendar dueDate = Calendar.getInstance();
             dueDate.set(Calendar.DAY_OF_MONTH, (int) (Math.random()*29) + 1);
             dueDate.set(Calendar.MONTH, (int) (Math.random()*3) + 3);
@@ -43,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                     Course.courses.get((long) (Math.random()*Course.courses.size())),
                     null,
                     dueDate,
-                    Math.random() < 0.5);
+                    Math.random() < 0.67);
             Task.addTask(task);
         }
 

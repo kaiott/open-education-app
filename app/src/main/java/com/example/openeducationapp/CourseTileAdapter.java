@@ -17,12 +17,12 @@ import java.util.Locale;
 
 public class CourseTileAdapter extends RecyclerView.Adapter<CourseTileAdapter.EventViewHolder> {
 
-    private String [] courses_names;
+    private int max_courses;
     private Context context;
 
-    public CourseTileAdapter(Context ct, String courses_names[]) {
+    public CourseTileAdapter(Context ct, int max_courses) {
         context = ct;
-        this.courses_names = courses_names;
+        this.max_courses = max_courses;
     }
 
     @NonNull
@@ -35,12 +35,11 @@ public class CourseTileAdapter extends RecyclerView.Adapter<CourseTileAdapter.Ev
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, final int position) {
-        holder.titleText.setText(courses_names[position]);
-        int num_tasks = getItemCount()-1; // (int) (Math.random()*10);
-        int done_tasks = position; // (int) (Math.random()*num_tasks);
-        holder.progressBar.setMax(num_tasks);
-        holder.progressBar.setProgress(done_tasks);
-        holder.progressText.setText(String.format(Locale.GERMAN, "%d/%s", done_tasks, num_tasks));
+        holder.titleText.setText(Course.courses.get((long) position).getName());
+        Course.Ratio ratioTasksDone = Course.courses.get((long) position).numberOfTasks();
+        holder.progressBar.setMax(ratioTasksDone.getTotal());
+        holder.progressBar.setProgress(ratioTasksDone.getDone());
+        holder.progressText.setText(ratioTasksDone.toString());
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +50,7 @@ public class CourseTileAdapter extends RecyclerView.Adapter<CourseTileAdapter.Ev
 
     @Override
     public int getItemCount() {
-        return courses_names.length;
+        return Course.courses.size();
     }
 
     public class EventViewHolder extends RecyclerView.ViewHolder{

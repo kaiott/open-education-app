@@ -46,12 +46,12 @@ public class MainFragment extends Fragment {
                 myAdapter = new TaskTileAdapter(getActivity(), 15);
                 break;
             case R.id.nav_classroom:
-                myAdapter = new CourseTileAdapter(getActivity(), course_names);
+                myAdapter = new CourseTileAdapter(getActivity(), 15);
                 break;
             case R.id.nav_chat:
-                myAdapter = new CourseTileAdapter(getActivity(), course_names);
+                myAdapter = new CourseTileAdapter(getActivity(), 15);
                 break;
-            default: myAdapter = new CourseTileAdapter(getActivity(), course_names);
+            default: myAdapter = new CourseTileAdapter(getActivity(), 15);
         }
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
