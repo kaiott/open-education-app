@@ -2,22 +2,32 @@ package com.example.openeducationapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     NavigationView navigationView;
+
+    boolean[] filterDialogSelection = {true, true};
+    String[] filterDialogItems = {"Aufgaben aus der Vergangenheit anzeigen", "Erledigte Aufgaben anzeigen"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +47,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new MainFragment(R.id.nav_tasks)).commit();
+        updatePreferences();
+        updateUI();
+    }
+
+    protected void updateUI() {
+        if (navigationView.getCheckedItem() == null) {
             navigationView.setCheckedItem(R.id.nav_tasks);
+        }
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new MainFragment(navigationView.getCheckedItem().getItemId())).commit();
+    }
+
+    protected void updatePreferences() {
+        SharedPreferences preferences = getSharedPreferences("init", MODE_PRIVATE);
+        for (int i = 0; i < filterDialogSelection.length; i++) {
+            filterDialogSelection[i] = preferences.getBoolean(String.format(Locale.ENGLISH,"filterSelection%d", i), true);
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new MainFragment(navigationView.getCheckedItem().getItemId())).commit();
+        updatePreferences();
+        updateUI();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
     }
 
     @Override
@@ -74,6 +103,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.filter_icon) {
+            AlertDialog dialog = makeFilterAlert();
+            dialog.show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected AlertDialog makeFilterAlert() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+        mBuilder.setMultiChoiceItems(filterDialogItems, filterDialogSelection, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                        SharedPreferences preferences = getSharedPreferences("init", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        try {
+                            filterDialogSelection[i] = b;
+                        } catch (IndexOutOfBoundsException be) {
+                            be.printStackTrace();
+                        }
+                        editor.putBoolean(String.format(Locale.ENGLISH,"filterSelection%d",i),b);
+                        editor.apply();
+                    }
+                })
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //updateEvents();
+                        //updateUI();
+                    }
+                });
+        return mBuilder.create();
     }
 
     @Override
