@@ -1,6 +1,12 @@
 package com.example.openeducationapp;
 
+import java.util.HashMap;
+
 public class Course {
+
+    // Hashmap with all courses
+    public static HashMap<Long, Course> courses;
+
     long courseID;
     String name;
     String abbreviation;
@@ -25,5 +31,12 @@ public class Course {
 
     public Course() {
 
+    }
+
+    public static void addCourse(Course course) {
+        if (courses == null) {
+            courses = new HashMap<>();
+        }
+        courses.put(course.courseID, course);
     }
 }

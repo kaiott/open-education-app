@@ -1,9 +1,12 @@
 package com.example.openeducationapp;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class Task {
+
+    public static HashMap<Long, Task> tasks;
 
     long taskID;
 
@@ -76,5 +79,12 @@ public class Task {
                 return "Sa";
         }
         return "dfasdfjoasfdj";
+    }
+
+    public static void addTask(Task task) {
+        if (tasks == null) {
+            tasks = new HashMap<>();
+        }
+        tasks.put(task.taskID, task);
     }
 }
