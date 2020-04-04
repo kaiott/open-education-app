@@ -28,6 +28,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     Task task;
     long task_id;
     boolean is_done;
+    int text_size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     }
 
-    // Get current ID from Intent and Tasks from shared Preferences
+    // Get current ID from Intent and textsize from shared Preferences
     private void getData() {
         task = new Task();
         if (getIntent().hasExtra("task_id")) {
@@ -74,6 +75,9 @@ public class TaskDetailActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "no data", Toast.LENGTH_SHORT).show();
         }
+
+        SharedPreferences sharedPreferences = getSharedPreferences("settings",MODE_PRIVATE);
+        text_size = sharedPreferences.getInt("text_size",18);
     }
 
     private void setData() {
@@ -82,6 +86,8 @@ public class TaskDetailActivity extends AppCompatActivity {
         txt_todo.setText(task.formattedDueDate());
 
         btn_done.setSelected(task.isDone());
+
+        txt_task_description.setTextSize(text_size);
     }
 
 }
