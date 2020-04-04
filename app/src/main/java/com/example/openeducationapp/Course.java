@@ -7,9 +7,9 @@ public class Course {
     // Hashmap with all courses
     public static HashMap<Long, Course> courses;
 
-    long courseID;
-    String name;
-    String abbreviation;
+    private long courseID;
+    private String name;
+    private String abbreviation;
 
     public long getCourseID() {
         return courseID;

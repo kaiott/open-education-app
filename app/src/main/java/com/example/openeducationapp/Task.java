@@ -8,12 +8,12 @@ public class Task {
 
     public static HashMap<Long, Task> tasks;
 
-    long taskID;
+    private long taskID;
 
-    String title, description;
-    Course course;
-    Calendar dateCreated, dueDate;
-    boolean isDone;
+    private String title, description;
+    private Course course;
+    private Calendar dateCreated, dueDate;
+    private boolean isDone;
 
     public Task(long id, String title, String description, Course course, Calendar dateCreated, Calendar dueDate, boolean isDone) {
         this.taskID = id;
