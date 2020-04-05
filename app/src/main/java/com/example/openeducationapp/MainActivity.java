@@ -101,14 +101,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         MainFragment.newInstance(item.getItemId())).commit();
                 break;
             case R.id.nav_settings:
-                Intent intent1 = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intent1);
+                Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settingsIntent);
                 break;
             case R.id.nav_logout:
                 getSharedPreferences("user", MODE_PRIVATE).edit().clear().apply();
                 Toast.makeText(this, "Abmelden", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
+                finish();
+                break;
+            case R.id.nav_exit:
+                Intent leaveIntent = new Intent(Intent.ACTION_MAIN);
+                leaveIntent.addCategory(Intent.CATEGORY_HOME);
+                leaveIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(leaveIntent);
                 finish();
                 break;
         }
@@ -158,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
             return;
         }
-        super.onBackPressed();
+        drawer.openDrawer(GravityCompat.START);
+        //super.onBackPressed();
     }
 }

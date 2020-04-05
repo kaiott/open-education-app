@@ -39,19 +39,19 @@ public class TaskTileAdapter extends RecyclerView.Adapter<TaskTileAdapter.EventV
 
         int flag_id;
         switch (tasks.get(position).getCourse().getAbbreviation()){
-            case "Math":
+            case "M":
                 flag_id = R.drawable.task_flag_math;
                 break;
-            case "DE":
+            case "D":
                 flag_id = R.drawable.task_flag_de;
                 break;
-            case "Franz":
+            case "F":
                 flag_id = R.drawable.task_flag_fr;
                 break;
-            case "GE":
+            case "Ge":
                 flag_id = R.drawable.task_flag_ge;
                 break;
-            case "Eng":
+            case "E":
                 flag_id=R.drawable.task_flag_en;
                 break;
             case "NNM":

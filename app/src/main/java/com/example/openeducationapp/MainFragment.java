@@ -26,21 +26,10 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int fragment;
-        switch (getArguments().getInt("id")) {
-            case R.id.nav_tasks:
-                fragment = R.layout.fragment_recycler;
-                break;
-            case R.id.nav_classroom:
-                fragment = R.layout.fragment_recycler;
-                break;
-            case R.id.nav_chat:
-                fragment = R.layout.fragment_recycler;
-                break;
-            default: fragment = R.layout.fragment_recycler;
-        }
+        fragment = R.layout.fragment_recycler;
+
         View view = inflater.inflate(fragment, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
-        String [] course_names ={"Mathematik", "Deutsch", "Französisch", "Geschichte", "English", "Natur Mensch Mitwelt"};
         RecyclerView.Adapter myAdapter;
         switch (getArguments().getInt("id")) {
             case R.id.nav_tasks:
@@ -49,8 +38,11 @@ public class MainFragment extends Fragment {
                 boolean showDone = getActivity().getSharedPreferences("init", Context.MODE_PRIVATE).getBoolean("filterSelection1", true);
                 Calendar yesterday = Calendar.getInstance();
                 yesterday.add(Calendar.DAY_OF_MONTH, -1);
+                int course_id = getArguments().getInt("course_id",-1);
                 for (Task task : Task.tasks.values()) {
-                    if ((showPast || task.getDueDate().compareTo(yesterday) > 0) && (showDone || !task.isDone())) {
+                    if ((showPast || task.getDueDate().compareTo(yesterday) > 0) &&
+                            (showDone || !task.isDone()) &&
+                            (course_id == -1 || course_id == task.getCourse().getCourseID() ) ) {
                         tasks.add(task);
                     }
                 }
@@ -74,6 +66,14 @@ public class MainFragment extends Fragment {
     public static MainFragment newInstance(int id) {
         Bundle args = new Bundle();
         args.putInt("id", id);
+        MainFragment f = new MainFragment();
+        f.setArguments(args);
+        return f;
+    }
+    public static MainFragment newInstance(int id, int course_id) {
+        Bundle args = new Bundle();
+        args.putInt("id", id);
+        args.putInt("course_id", course_id);
         MainFragment f = new MainFragment();
         f.setArguments(args);
         return f;

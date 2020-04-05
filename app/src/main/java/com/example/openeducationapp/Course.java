@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Course implements Serializable {
 
@@ -14,7 +17,6 @@ public class Course implements Serializable {
 
     private int courseID;
     private String name;
-    private String abbreviation;
 
     public int getCourseID() {
         return courseID;
@@ -25,13 +27,12 @@ public class Course implements Serializable {
     }
 
     public String getAbbreviation() {
-        return abbreviation;
+        return getAbbreviation(this.name);
     }
 
-    public Course(int id, String name, String abbreviation) {
+    public Course(int id, String name) {
         this.courseID = id;
         this.name = name;
-        this.abbreviation = abbreviation;
     }
 
     public Course() {
@@ -88,5 +89,24 @@ public class Course implements Serializable {
             total++;
         }
         return new Ratio(done, total);
+    }
+
+
+    protected static Map<String, String> abbs = new HashMap<String, String> () {{
+        put("Mathematik", "M");
+        put("English", "E");
+        put("Französisch", "F");
+        put("Deutsch", "D");
+        put("Biologie", "B");
+        put("Geschichte", "Ge");
+        put("Chemie", "C");
+        put("Natur Mensch Mitwelt", "NNM");
+    }};
+    public String getAbbreviation(String course) {
+        String res = abbs.get(course);
+        if (res == null) {
+            res = course.substring(0,2);
+        }
+        return res;
     }
 }

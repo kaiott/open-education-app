@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         for (int i = 0; i < courseNames.length; i++) {
-            Course.addCourse(new Course(i, courseNames[i], courseAbbs[i]));
+            Course.addCourse(new Course(i, courseNames[i]));
         }
         for (int i = 0; i < 60; i++) {
             Calendar dueDate = Calendar.getInstance();
