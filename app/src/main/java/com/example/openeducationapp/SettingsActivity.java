@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,12 +15,18 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
+
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URI;
 import java.net.URISyntaxException;
 
-import io.socket.client.IO;
-import io.socket.client.Socket;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -29,9 +38,10 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-    private Socket socket;
-
     int text_size, history;
+
+    private Socket mSocket;
+    private WebSocketClient mWebSocketClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +49,12 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         try {
-            socket = IO.socket("http://10.10.41.101:8000");
-            socket.connect();
-            Log.d(TAG, "onCreate: Socket connection");
-            Log.d(TAG, "onCreate: socket connected "+socket.connected());
-        } catch (URISyntaxException e) {
-            Log.e("HERE", e.getMessage());
-        }
+            mSocket = IO.socket("http://chat.powermail.icu");
+        } catch (URISyntaxException e) {}
+        mSocket.connect();
 
-        Log.d(TAG, "onCreate: socket connected "+socket.connected());
-        if (socket.connected()){
-            Toast.makeText(SettingsActivity.this, "Socket Connected!!",Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "onCreate: Socket connected!!!");
-        }
+        //connectWebSocket();
+
 
 
 
@@ -115,11 +118,9 @@ public class SettingsActivity extends AppCompatActivity {
         btn_signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSharedPreferences("user", MODE_PRIVATE).edit().clear().apply();
-                Toast.makeText(SettingsActivity.this, "Abmelden", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                //sendMessage(v);
+                attemptSend();
+                Log.d(TAG, "onClick: send message "+ mSocket.connected());
             }
         });
 
@@ -133,5 +134,101 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }));
 
+    }
+
+    /*
+    private void connectWebSocket() {
+        Log.d(TAG, "connectWebSocket: ");
+        URI uri;
+        try {
+            uri = new URI("ws://powermail.icu:8000");
+            Log.d(TAG, "connectWebSocket: uri");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        mWebSocketClient = new WebSocketClient(uri) {
+            private static final String TAG = "SettingsActivity";
+
+            @Override
+            public void onOpen(ServerHandshake serverHandshake) {
+                Log.d(TAG, "onOpen: handshake");
+                Log.i("Websocket", "Opened");
+                JSONObject obj = new JSONObject();
+                try {
+                    obj.accumulate("getTasks", 20);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String jsonString = null;
+                try {
+                    jsonString = obj.toString(4);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mWebSocketClient.send("42" + jsonString);
+
+            }
+
+            @Override
+            public void onMessage(String s) {
+                final String message = s;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d(TAG, "run: received Message: "+message);
+                    }
+                });
+            }
+
+            @Override
+            public void onClose(int i, String s, boolean b) {
+                Log.i("Websocket", "Closed " + s);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.i("Websocket", "Error " + e.getMessage());
+            }
+        };
+        mWebSocketClient.connect();
+        Log.d(TAG, "connectWebSocket: "+mWebSocketClient.isClosed());
+    }
+
+    public void sendMessage(View view) {
+        Log.d(TAG, "sendMessage: send");
+        JSONObject obj = new JSONObject();
+        try {
+            obj.accumulate("getTasks", 20);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String jsonString = null;
+        try {
+            jsonString = obj.toString(4);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mWebSocketClient.send("42" + jsonString);
+    }
+
+
+     */
+    private void attemptSend() {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.accumulate("getTasks", 20);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String jsonString = null;
+        try {
+            jsonString = obj.toString(4);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mSocket.emit("42", jsonString);
+        mSocket.connect();
     }
 }
