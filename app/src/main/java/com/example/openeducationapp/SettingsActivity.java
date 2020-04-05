@@ -14,6 +14,11 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.net.URISyntaxException;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+
 public class SettingsActivity extends AppCompatActivity {
 
     private static final String TAG = "SettingsActivity";
@@ -24,12 +29,31 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    private Socket socket;
+
     int text_size, history;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        try {
+            socket = IO.socket("http://10.10.41.101:8000");
+            socket.connect();
+            Log.d(TAG, "onCreate: Socket connection");
+            Log.d(TAG, "onCreate: socket connected "+socket.connected());
+        } catch (URISyntaxException e) {
+            Log.e("HERE", e.getMessage());
+        }
+
+        Log.d(TAG, "onCreate: socket connected "+socket.connected());
+        if (socket.connected()){
+            Toast.makeText(SettingsActivity.this, "Socket Connected!!",Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onCreate: Socket connected!!!");
+        }
+
+
 
         btn_signout = findViewById(R.id.btn_signout);
         back = findViewById(R.id.btn_back);
