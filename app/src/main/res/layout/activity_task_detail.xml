@@ -77,9 +77,10 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:background="#00FFFFFF"
         android:onClick="captureImage"
         app:layout_constraintBottom_toBottomOf="@+id/btn_done"
         app:layout_constraintStart_toEndOf="@+id/btn_done"
@@ -88,9 +89,10 @@
 
     <ImageButton
         android:id="@+id/display_image_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
+        android:background="#00FFFFFF"
         android:onClick="displayImage"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton"
         app:layout_constraintStart_toEndOf="@+id/imageButton"

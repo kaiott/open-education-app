@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:elevation="8dp"
-                android:paddingEnd="8dp"
+                android:paddingEnd="9dp"
                 android:text="Math"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
