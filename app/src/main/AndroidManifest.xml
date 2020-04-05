@@ -10,8 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DisplayImageActivity"/>
+        <activity
+            android:name=".DisplayImageActivity"
+            android:label="Hochgeladenes Foto"/>
         <activity android:name=".SettingsActivity"
+            android:label="Einstellungen"
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".TaskDetailActivity" />
         <activity android:name=".LoginActivity">

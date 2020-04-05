@@ -42,58 +42,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_task_title" />
 
-    <Button
-        android:id="@+id/btn_download_docs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:text="Dokumente Herunterladen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_task_description" />
-
     <TextView
         android:id="@+id/txt_todo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/txt_todo"
         android:textSize="@dimen/task_text_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_chatgroup" />
+        app:layout_constraintBottom_toTopOf="@+id/txt_task_dueDate"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txt_task_dueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp"
         android:text="Mo, 22.04.2020"
         android:textSize="@dimen/task_text_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_todo" />
-
-    <Button
-        android:id="@+id/btn_chatgroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/btn_chatgroup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_download_docs" />
+        app:layout_constraintBottom_toTopOf="@+id/btn_done"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_done"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/button_rounded"
         android:text="@string/btn_done"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_task_dueDate" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -104,7 +84,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/btn_done"
         app:layout_constraintStart_toEndOf="@+id/btn_done"
         app:layout_constraintTop_toTopOf="@+id/btn_done"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        app:srcCompat="@drawable/ic_photo_camera_black_40dp" />
 
     <ImageButton
         android:id="@+id/display_image_button"
@@ -115,6 +95,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageButton"
         app:layout_constraintStart_toEndOf="@+id/imageButton"
         app:layout_constraintTop_toTopOf="@+id/imageButton"
-        app:srcCompat="@android:drawable/ic_menu_report_image" />
+        app:srcCompat="@drawable/ic_photo_black_40dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

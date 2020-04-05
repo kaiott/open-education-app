@@ -20,7 +20,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     TextView txt_settings_history, txt_settings_textsize;
     SeekBar seekBar1, seekBar2;
-    Button btn_signout, back;
+    Button back;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -31,7 +31,6 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        btn_signout = findViewById(R.id.btn_signout);
         back = findViewById(R.id.btn_back);
         txt_settings_textsize = findViewById(R.id.txt_settings_textsize);
         txt_settings_history = findViewById(R.id.txt_settings_history);
@@ -86,18 +85,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-
-
-        btn_signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSharedPreferences("user", MODE_PRIVATE).edit().clear().apply();
-                Toast.makeText(SettingsActivity.this, "Abmelden", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         back.setOnClickListener((new View.OnClickListener() {
             @Override

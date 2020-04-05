@@ -26,7 +26,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     private static final String TAG = "TaskDetailActivity";
 
     TextView txt_task_title, txt_task_description, txt_todo;
-    Button btn_done, btn_documents, btn_chatgroup;
+    Button btn_done;
     ImageButton displayImageButton;
 
     Task task;
@@ -46,8 +46,6 @@ public class TaskDetailActivity extends AppCompatActivity {
         txt_task_title = findViewById(R.id.txt_task_title);
         txt_task_description = findViewById(R.id.txt_task_description);
         txt_todo = findViewById(R.id.txt_task_dueDate);
-        btn_chatgroup = findViewById(R.id.btn_chatgroup);
-        btn_documents = findViewById(R.id.btn_download_docs);
         btn_done = findViewById(R.id.btn_done);
 
         displayImageButton = findViewById(R.id.display_image_button);
