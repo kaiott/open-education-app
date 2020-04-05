@@ -55,7 +55,7 @@ public class CourseTileAdapter extends RecyclerView.Adapter<CourseTileAdapter.Ev
 
     @Override
     public int getItemCount() {
-        return Course.courses.size();
+        return Math.min(Course.courses.size(), max_courses);
     }
 
     public class EventViewHolder extends RecyclerView.ViewHolder{

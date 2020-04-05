@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_logout:
                 getSharedPreferences("user", MODE_PRIVATE).edit().clear().apply();
-                Toast.makeText(this, "Abmelden", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.logout, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();

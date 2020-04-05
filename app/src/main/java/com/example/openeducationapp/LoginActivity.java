@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
         else {
-            Toast.makeText(this, "Email und Passwort stimmen nicht überein", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.wrong_password, Toast.LENGTH_SHORT).show();
         }
     }
 
