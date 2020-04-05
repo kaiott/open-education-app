@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected boolean validateLogin(String username, String password) {
-        if (username.equals("kai") || username.equals("lars")) {
+        if (username.toLowerCase().equals("kai") || username.toLowerCase().equals("lars") || username.toLowerCase().equals("enis") || username.toLowerCase().equals("caro")) {
             return true;
         }
         return false;
