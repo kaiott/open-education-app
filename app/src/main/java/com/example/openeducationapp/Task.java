@@ -14,6 +14,7 @@ public class Task implements Serializable, Comparable<Task> {
     private Course course;
     private Calendar dateCreated, dueDate;
     private boolean isDone;
+    private String imagePath;
 
     public Task(){
         this.taskID = 0;
@@ -23,9 +24,10 @@ public class Task implements Serializable, Comparable<Task> {
         this.dateCreated = Calendar.getInstance();
         this.dueDate = Calendar.getInstance();
         this.isDone = false;
+        this.imagePath = null;
     }
 
-    public Task(int id, String title, String description, Course course, Calendar dateCreated, Calendar dueDate, boolean isDone) {
+    public Task(int id, String title, String description, Course course, Calendar dateCreated, Calendar dueDate, boolean isDone, String imagePath) {
         this.taskID = id;
         this.title = title;
         this.description = description;
@@ -33,6 +35,7 @@ public class Task implements Serializable, Comparable<Task> {
         this.dateCreated = dateCreated;
         this.dueDate = dueDate;
         this.isDone = isDone;
+        this.imagePath = imagePath;
     }
 
     public int getTaskID() {
@@ -65,6 +68,14 @@ public class Task implements Serializable, Comparable<Task> {
 
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String formattedDueDate() {

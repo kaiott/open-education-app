@@ -20,19 +20,13 @@ import java.util.Collections;
 
 public class MainFragment extends Fragment {
 
-    private int nav_item;
     RecyclerView recyclerView;
 
-
-    public MainFragment(int nav_item) {
-        this.nav_item = nav_item;
-    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int fragment;
-
-        switch (nav_item) {
+        switch (getArguments().getInt("id")) {
             case R.id.nav_tasks:
                 fragment = R.layout.fragment_recycler;
                 break;
@@ -48,7 +42,7 @@ public class MainFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         String [] course_names ={"Mathematik", "Deutsch", "Französisch", "Geschichte", "English", "Natur Mensch Mitwelt"};
         RecyclerView.Adapter myAdapter;
-        switch (nav_item) {
+        switch (getArguments().getInt("id")) {
             case R.id.nav_tasks:
                 ArrayList<Task> tasks= new ArrayList<>();
                 boolean showPast = getActivity().getSharedPreferences("init", Context.MODE_PRIVATE).getBoolean("filterSelection0", true);
@@ -75,5 +69,13 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;
+    }
+
+    public static MainFragment newInstance(int id) {
+        Bundle args = new Bundle();
+        args.putInt("id", id);
+        MainFragment f = new MainFragment();
+        f.setArguments(args);
+        return f;
     }
 }

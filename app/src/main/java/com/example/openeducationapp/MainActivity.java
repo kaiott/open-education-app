@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_tasks);
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new MainFragment(navigationView.getCheckedItem().getItemId())).commit();
+                MainFragment.newInstance(navigationView.getCheckedItem().getItemId())).commit();
     }
 
     protected void updatePreferences() {
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_classroom:
             case R.id.nav_chat:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MainFragment(item.getItemId())).commit();
+                        MainFragment.newInstance(item.getItemId())).commit();
                 break;
             case R.id.nav_settings:
                 Intent intent1 = new Intent(MainActivity.this, SettingsActivity.class);

@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                     Course.courses.get((int) (Math.random()*Course.courses.size())),
                     null,
                     dueDate,
-                    Math.random() < 0.67);
+                    Math.random() < 0.67, null);
             Task.addTask(task);
         }
 
