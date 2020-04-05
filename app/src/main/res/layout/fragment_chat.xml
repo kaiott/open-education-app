@@ -6,19 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/alt1">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
-
     <TextView
-        android:id="@+id/no_tasks_to_show_view"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Keine Aufgaben anzuzeigen"
-        android:visibility="invisible"
+        android:text="Spätere Chat Funktionalität"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

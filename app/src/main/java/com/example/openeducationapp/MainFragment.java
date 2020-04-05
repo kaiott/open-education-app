@@ -6,6 +6,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,11 +26,15 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        int fragment;
-        fragment = R.layout.fragment_recycler;
+        if(getArguments().getInt("id") == R.id.nav_chat) {
+            View view = inflater.inflate(R.layout.fragment_chat, container, false);
+            recyclerView = view.findViewById(R.id.recyclerView);
+            return view;
+        }
 
-        View view = inflater.inflate(fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_recycler, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
+
         RecyclerView.Adapter myAdapter;
         switch (getArguments().getInt("id")) {
             case R.id.nav_tasks:
@@ -47,6 +52,13 @@ public class MainFragment extends Fragment {
                     }
                 }
                 Collections.sort(tasks);
+                TextView noTasksToShow = view.findViewById(R.id.no_tasks_to_show_view);
+                if (tasks.isEmpty()) {
+                    noTasksToShow.setVisibility(View.VISIBLE);
+                }
+                else {
+                    noTasksToShow.setVisibility(View.INVISIBLE);
+                }
                 myAdapter = new TaskTileAdapter(getActivity(), tasks);
                 break;
             case R.id.nav_classroom:

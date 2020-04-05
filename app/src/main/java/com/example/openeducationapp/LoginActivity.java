@@ -19,9 +19,6 @@ public class LoginActivity extends AppCompatActivity {
                             "Kapitel 2",
                             "Rest von Kapitel 4"};
     String [] courseNames = {"Mathematik", "Deutsch", "Französisch", "Geschichte", "English", "Natur Mensch Mitwelt"};
-    String [] courseAbbs = {"Math", "DE", "Franz", "GE", "Eng", "NNM"};
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         for (int i = 0; i < courseNames.length; i++) {
             Course.addCourse(new Course(i, courseNames[i]));
         }
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 20; i++) {
             Calendar dueDate = Calendar.getInstance();
             dueDate.set(Calendar.DAY_OF_MONTH, (int) (Math.random()*29) + 1);
             dueDate.set(Calendar.MONTH, (int) (Math.random()*3) + 3);
